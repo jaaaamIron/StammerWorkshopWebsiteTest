@@ -983,7 +983,7 @@
     // Remove this before your final PRODUCTION deploy!
     setTimeout(() => {
       const form = document.querySelector('form[data-netlify="true"]');
-      if (form && (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1")) {
+      if (form && (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1" || window.location.hostname.includes("github.io"))) {
         form.addEventListener("submit", (e) => {
           e.preventDefault();
           console.log("Local Mock: Form submitted successfully!", new FormData(form));
