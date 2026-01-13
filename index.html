@@ -483,7 +483,7 @@
                 <div className="relative z-20 pointer-events-auto">
                   {/* Brackish Text (fades out) */}
                   <div
-                    className={`absolute inset-0 flex items-center justify-center transition-all duration-700 ${brackishStyles.text}`}
+                    className={`absolute inset-0 flex items-center justify-center ${brackishStyles.text}`}
                     style={{
                       opacity: mainOpacity * (1 - themeProgress),
                       pointerEvents: themeProgress < 0.5 ? 'auto' : 'none',
@@ -495,7 +495,7 @@
 
                   {/* Narrative Text (fades in) */}
                   <div
-                    className={`relative flex items-center justify-center transition-all duration-700 ${narrativeStyles.text}`}
+                    className={`relative flex items-center justify-center ${narrativeStyles.text}`}
                     style={{
                       opacity: mainOpacity * themeProgress,
                       pointerEvents: themeProgress >= 0.5 ? 'auto' : 'none',
