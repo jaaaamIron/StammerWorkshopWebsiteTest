@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Test4: A Mouth In Search Of A Voice: Workshops for people who stammer</title>
+  <title>Test5: A Mouth In Search Of A Voice: Workshops for people who stammer</title>
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -134,7 +134,7 @@
       </div>
     );
 
-    const NarrativeNode = ({ children, className = "", onLayout, id, anchor = "center", applyGrayscale = false }) => {
+    const NarrativeNode = ({ children, className = "", onLayout, id, anchor = "center" }) => {
       const nodeRef = useRef(null);
       const [opacity, setOpacity] = useState(0);
 
@@ -201,9 +201,8 @@
           className={`relative flex items-center justify-center ${className}`}
           style={{
             opacity,
-            filter: applyGrayscale ? `grayscale(${(1 - opacity) * 100}%)` : 'none',
-            willChange: 'opacity, filter',
-            transition: 'opacity 50ms linear, filter 50ms linear'
+            willChange: 'opacity',
+            transition: 'opacity 50ms linear'
           }}>
           {children}
         </div>
@@ -823,7 +822,7 @@
 
                   {/* Node 6: Image 1 (Ensemble - Shifted Right - Asymmetrical) */}
                   <div className="col-start-2 col-span-11 md:col-start-5 md:col-span-8">
-                    <NarrativeNode id="node-5" onLayout={handleNodeLayout} applyGrayscale={true} className="aspect-video group w-full z-10 relative">
+                    <NarrativeNode id="node-5" onLayout={handleNodeLayout} className="aspect-video group w-full z-10 relative">
                       <div className="absolute inset-0 bg-narrative-accent/10 mix-blend-multiply z-10 group-hover:bg-transparent transition-colors duration-700"></div>
                       <img src="./ensemble.webp" alt="Phaedra Ensemble" className="w-full h-full object-cover contrast-125 brightness-90 group-hover:contrast-100 transition-all duration-1000 ease-out" />
                       <div className="absolute -bottom-6 left-0 font-mono text-[10px] text-narrative-accent/50 tracking-widest uppercase">FIG A — PHAEDRA ENSEMBLE</div>
@@ -868,7 +867,7 @@
 
                   {/* Node 11: Image 2 (Jamie - Shifted Left - Asymmetrical) */}
                   <div className="col-start-1 col-span-11 md:col-start-1 md:col-span-7">
-                    <NarrativeNode id="node-10" onLayout={handleNodeLayout} applyGrayscale={true} className="aspect-video group w-full z-10 relative">
+                    <NarrativeNode id="node-10" onLayout={handleNodeLayout} className="aspect-video group w-full z-10 relative">
                       <div className="absolute inset-0 bg-narrative-accent/10 mix-blend-multiply z-10 group-hover:bg-transparent transition-colors duration-700"></div>
                       <img src="./hamilton.webp" alt="Jamie Hamilton" className="w-full h-full object-cover contrast-125 brightness-90 group-hover:contrast-100 transition-all duration-1000 ease-out" />
                       <div className="absolute -bottom-6 right-0 font-mono text-[10px] text-narrative-accent/50 tracking-widest uppercase text-right">FIG B — JAMIE HAMILTON</div>
