@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Test2: A Mouth In Search Of A Voice: Workshops for people who stammer</title>
+  <title>Test3: A Mouth In Search Of A Voice: Workshops for people who stammer</title>
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -672,26 +672,33 @@
       }, []);
 
       useEffect(() => {
-        const handleScroll = () => {
+        let rafId = null;
+
+        const updateScroll = () => {
           const y = window.scrollY;
           setScrollY(y);
 
-          // Theme switching logic
-          // Switch to 'narrative' (off-white) as we scroll out of the hero section
-          // Trigger when we are 70% down the viewport (entering last 30% of first screen) if that's the intention, 
-          // OR when we've scrolled past a certain point.
-          // Given the request: "crossfades from neuro to NEW in the last 30% of the hero scroll"
-          // Assuming 'hero scroll' means scrolling down one viewport height for the hero.
           const heroHeight = window.innerHeight;
-
           if (y > heroHeight * 0.6) {
             setTheme('narrative');
           } else {
             setTheme('brackish');
           }
         };
+
+        const handleScroll = () => {
+          if (rafId) return;
+          rafId = requestAnimationFrame(() => {
+            updateScroll();
+            rafId = null;
+          });
+        };
+
         window.addEventListener('scroll', handleScroll, { passive: true });
-        return () => window.removeEventListener('scroll', handleScroll);
+        return () => {
+          window.removeEventListener('scroll', handleScroll);
+          if (rafId) cancelAnimationFrame(rafId);
+        };
       }, []);
 
       const [windowHeight, setWindowHeight] = useState(window.innerHeight);
@@ -708,19 +715,13 @@
       const [narrativeProgress, setNarrativeProgress] = useState(0);
 
       useEffect(() => {
+        let rafId = null;
+
         const calculateNarrativeProgress = () => {
           const aboutSection = document.getElementById('about');
           if (aboutSection) {
             const rect = aboutSection.getBoundingClientRect();
-            // Progress starts when the top of the section enters the bottom of the viewport
-            // and ends when the bottom of the section leaves the top of the viewport
             const sectionHeight = aboutSection.offsetHeight;
-            const start = window.innerHeight; // top of section is at bottom of screen
-            const current = rect.top;
-            const progress = 1 - (current / start);
-
-            // We want it to be 0 when it starts appearing, and 1 when we've scrolled through most of it
-            // Trigger drawing higher up the page (at 60% viewport instead of bottom)
             const triggerPoint = window.innerHeight * 0.6;
             const scrollRange = sectionHeight + triggerPoint * 0.5;
             const easedProgress = Math.min(1, Math.max(0, (triggerPoint - rect.top) / scrollRange));
@@ -728,9 +729,20 @@
           }
         };
 
-        window.addEventListener('scroll', calculateNarrativeProgress);
+        const handleScroll = () => {
+          if (rafId) return;
+          rafId = requestAnimationFrame(() => {
+            calculateNarrativeProgress();
+            rafId = null;
+          });
+        };
+
         calculateNarrativeProgress();
-        return () => window.removeEventListener('scroll', calculateNarrativeProgress);
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        return () => {
+          window.removeEventListener('scroll', handleScroll);
+          if (rafId) cancelAnimationFrame(rafId);
+        };
       }, [windowHeight]);
 
       return (
