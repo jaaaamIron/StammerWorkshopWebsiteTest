@@ -4,7 +4,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Test6: A Mouth In Search Of A Voice: Workshops for people who stammer</title>
+  <title>Test10:A Mouth In Search Of A Voice: Workshops for people who stammer</title>
+  <meta name="description" content="Free creative workshops for people who stammer in Bristol, London, Kent and online. Explore voice, story, and music with professional musicians. Part of a new multimedia project by composer Jamie Hamilton and Phaedra Ensemble.">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="A Mouth In Search Of A Voice">
+  <meta property="og:description" content="Free creative workshops for people who stammer. Explore voice, story, and music in Bristol, London, Kent and online.">
+  <meta property="og:image" content="./ensemble.webp">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Favicon - Mouth shape -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><ellipse cx='50' cy='50' rx='45' ry='25' fill='none' stroke='%23f5f5f4' stroke-width='8'/></svg>">
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -46,9 +57,9 @@
     }
   </script>
 
-  <!-- React & ReactDOM -->
-  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
-  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <!-- React & ReactDOM (Production) -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
 
   <!-- Babel -->
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -62,6 +73,11 @@
     /* Prevent horizontal overscroll on both platforms */
     html {
       overscroll-behavior-x: none;
+    }
+    /* Keyboard focus styles */
+    a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+      outline: 2px solid #002FA7;
+      outline-offset: 2px;
     }
   </style>
 </head>
@@ -304,12 +320,11 @@
                   fill="none"
                   stroke="#002FA7"
                   strokeWidth="0.75"
-                  strokeOpacity={0.2 + (path.progress * 0.3)}
-                  strokeDasharray={length || 10000}
-                  strokeDashoffset={length ? offset : 0}
-                  markerStart="url(#crosshair)"
-                  markerEnd={path.progress > 0.95 ? "url(#crosshair)" : ""}
-                  className="transition-all duration-300 ease-out"
+                  strokeOpacity={length ? (0.2 + (path.progress * 0.3)) : 0}
+                  strokeDasharray={length}
+                  strokeDashoffset={offset}
+                  markerStart={length ? "url(#crosshair)" : ""}
+                  markerEnd={length && path.progress > 0.95 ? "url(#crosshair)" : ""}
                 />
 
                 {/* Invisible path for text orientation correction */}
@@ -341,9 +356,6 @@
       const verticalSpacing = 10 + (scrollProgress * 60);
       const driftExponential = 1 + (scrollProgress * 2);
       const blurAmount = scrollProgress * 8;
-
-      const headerLeft = "Map Ref: 44.2N";
-      const headerRight = "Neuro / Echo / Voice";
 
       // Simple Theme Logic
       const isLight = theme === 'neuro' || theme === 'narrative';
@@ -393,7 +405,6 @@
       const echoInitialOffsetX = 0;
       const echoOffset = 15;
       const opacityDecay = 70;
-      const letterSpacing = 0 + (scrollProgress * 0.2);
 
       // Fading Logic
       // --- HERO TEXT FADE SETTINGS ---
@@ -589,7 +600,7 @@
               </div>
 
               <div className="space-y-2">
-                <label className="text-xs font-bold uppercase tracking-wider opacity-60">Any specific questions?</label>
+                <label className="text-xs font-bold uppercase tracking-wider opacity-60">Do you have any questions or concerns?</label>
                 <textarea name="questions" rows="2" placeholder="I am wondering about..." className={`w-full p-3 rounded border text-sm outline-none transition-colors ${inputStyle}`} />
               </div>
 
@@ -827,7 +838,7 @@
                     <NarrativeNode id="node-4" onLayout={handleNodeLayout} className="z-10 relative">
                       {/* Tweak size/font/style here: (text-lg, md:text-xl) */}
                       <p className="text-lg md:text-xl font-sans text-narrative-main/80 leading-relaxed text-left">
-                        The workshops are part of <a href="https://www.jamiehamilton.net" target="_blank" className="underline decoration-narrative-accent/30 hover:decoration-narrative-accent transition-all">A Mouth In Search Of A Voice</a>, a new music and multimedia project by composer <a href="https://www.jamiehamilton.net" target="_blank" className="underline decoration-narrative-accent/30 hover:decoration-narrative-accent transition-all">Jamie Hamilton</a> (a stammerer) and the music group <a href="https://www.phaedraensemble.com" target="_blank" className="underline decoration-narrative-accent/30 hover:decoration-narrative-accent transition-all">Phaedra Ensemble</a>. The work passes language and narrative through stammered voices - disrupting and reimagining them through dysfluency - and draws on ideas of coastlines, flow and unreliable narration.
+                        The workshops are part of <a href="https://www.jamiehamilton.net" target="_blank" rel="noopener noreferrer" className="underline decoration-narrative-accent/30 hover:decoration-narrative-accent transition-all">A Mouth In Search Of A Voice</a>, a new music and multimedia project by composer <a href="https://www.jamiehamilton.net" target="_blank" rel="noopener noreferrer" className="underline decoration-narrative-accent/30 hover:decoration-narrative-accent transition-all">Jamie Hamilton</a> (a stammerer) and the music group <a href="https://www.phaedraensemble.com" target="_blank" rel="noopener noreferrer" className="underline decoration-narrative-accent/30 hover:decoration-narrative-accent transition-all">Phaedra Ensemble</a>. The work passes language and narrative through stammered voices - disrupting and reimagining them through dysfluency - and draws on ideas of coastlines, flow and unreliable narration.
                       </p>
                     </NarrativeNode>
                   </div>
@@ -902,7 +913,7 @@
             </div>
 
             {/* Workshop List Table - Revisited for Narrative Flow */}
-            <section className="max-w-3xl mx-auto px-4 md:px-8 mb-24 relative z-10 w-full">
+            <section className="max-w-xl mx-auto px-4 md:px-8 mb-24 relative z-10 w-full">
               <NarrativeNode id="dates-table" className="w-full">
                 <div className="flex flex-col gap-2 font-mono text-[10px] md:text-sm uppercase tracking-wider text-narrative-main/80 pt-12 w-full">
                   <div className="flex gap-2 md:gap-4 border-b border-narrative-accent/10 pb-2 font-bold text-narrative-accent">
