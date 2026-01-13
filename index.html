@@ -139,6 +139,8 @@
       const [opacity, setOpacity] = useState(0);
 
       useEffect(() => {
+        let rafId = null;
+
         const updateLayout = () => {
           if (nodeRef.current) {
             const rect = nodeRef.current.getBoundingClientRect();
@@ -170,34 +172,38 @@
             } else if (elementCenter < triggerZoneBottom) {
               setOpacity(1);
             } else {
-              // Widen the sweet spot: triggerZoneTop (95% VH) to (60% VH) was old range.
-              // New range: 95% VH to 80% VH (shorter fade, longer full opacity) OR just deeper trigger point?
-              // Request: "Sweet spot" of appearing in colour to be wider.
-
-              // Let's adjust the denominator to be larger context (start fading in earlier/stay fully opaque longer).
-              // Actually, simply effectively moving "triggerZoneTop - (viewportHeight * 0.8)" increases the range where it IS opaque.
-
               const progress = (triggerZoneTop - elementCenter) / (triggerZoneTop - (viewportHeight * 0.8));
               setOpacity(Math.min(1, Math.max(0, progress)));
             }
           }
         };
 
+        const handleScroll = () => {
+          if (rafId) return; // Skip if a frame is already scheduled
+          rafId = requestAnimationFrame(() => {
+            updateLayout();
+            rafId = null;
+          });
+        };
+
         updateLayout();
-        window.addEventListener('scroll', updateLayout, { passive: true });
+        window.addEventListener('scroll', handleScroll, { passive: true });
         window.addEventListener('resize', updateLayout);
         return () => {
-          window.removeEventListener('scroll', updateLayout);
+          window.removeEventListener('scroll', handleScroll);
           window.removeEventListener('resize', updateLayout);
+          if (rafId) cancelAnimationFrame(rafId);
         };
       }, [id, onLayout, anchor]);
 
       return (
         <div ref={nodeRef}
-          className={`relative flex items-center justify-center transition-opacity duration-300 ${className}`}
+          className={`relative flex items-center justify-center ${className}`}
           style={{
             opacity,
-            filter: applyGrayscale ? `grayscale(${(1 - opacity) * 100}%)` : 'none'
+            filter: applyGrayscale ? `grayscale(${(1 - opacity) * 100}%)` : 'none',
+            willChange: 'opacity, filter',
+            transition: 'opacity 50ms linear, filter 50ms linear'
           }}>
           {children}
         </div>
