@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Test3: A Mouth In Search Of A Voice: Workshops for people who stammer</title>
+  <title>Test4: A Mouth In Search Of A Voice: Workshops for people who stammer</title>
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -461,10 +461,11 @@
                       key={i}
                       className={`absolute left-0 right-0 w-full select-none pointer-events-none transition-colors duration-700 ${currentThemeStyles.accent}`}
                       style={{
-                        top: `${echoInitialOffset + (expFactor * verticalSpacing)}px`,
-                        transform: `translateX(${echoInitialOffsetX + (expFactor * echoOffset)}px)`,
+                        top: 0,
+                        transform: `translate3d(${echoInitialOffsetX + (expFactor * echoOffset)}px, ${echoInitialOffset + (expFactor * verticalSpacing)}px, 0)`,
                         mixBlendMode: currentThemeStyles.blend,
                         filter: `blur(${blurAmount * (factor * 0.3)}px)`,
+                        willChange: 'transform, filter',
                         zIndex: -i
                       }}
                     >
@@ -485,7 +486,8 @@
                     className={`absolute inset-0 flex items-center justify-center transition-all duration-700 ${brackishStyles.text}`}
                     style={{
                       opacity: mainOpacity * (1 - themeProgress),
-                      pointerEvents: themeProgress < 0.5 ? 'auto' : 'none'
+                      pointerEvents: themeProgress < 0.5 ? 'auto' : 'none',
+                      willChange: 'opacity'
                     }}
                   >
                     <HeroContent opacity={1} subtitleOpacity={1} dateOpacity={dateOpacity} includeLink={false} />
@@ -496,7 +498,8 @@
                     className={`relative flex items-center justify-center transition-all duration-700 ${narrativeStyles.text}`}
                     style={{
                       opacity: mainOpacity * themeProgress,
-                      pointerEvents: themeProgress >= 0.5 ? 'auto' : 'none'
+                      pointerEvents: themeProgress >= 0.5 ? 'auto' : 'none',
+                      willChange: 'opacity'
                     }}
                   >
                     <HeroContent opacity={1} subtitleOpacity={1} dateOpacity={dateOpacity} includeLink={false} />
