@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Test5: A Mouth In Search Of A Voice: Workshops for people who stammer</title>
+  <title>Test6: A Mouth In Search Of A Voice: Workshops for people who stammer</title>
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -52,9 +52,21 @@
 
   <!-- Babel -->
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <style>
+    html, body {
+      overflow-x: hidden;
+      max-width: 100vw;
+      -webkit-overflow-scrolling: touch; /* iOS smooth scroll */
+    }
+    /* Prevent horizontal overscroll on both platforms */
+    html {
+      overscroll-behavior-x: none;
+    }
+  </style>
 </head>
 
-<body class="bg-stone-900 text-stone-100 antialiased overflow-x-hidden">
+<body class="bg-stone-900 text-stone-100 antialiased">
 
   <div id="root"></div>
 
@@ -882,55 +894,59 @@
 
             {/* Section 03 Heading (Centered) */}
             <div id="dates-section" className="max-w-4xl mx-auto px-8 mb-12 relative z-10 flex justify-center">
-              <span className="font-mono text-xs tracking-[0.3em] text-narrative-accent uppercase border-b border-narrative-accent/30 pb-2 opacity-60">
-                03 / When, Where & Sign Up
-              </span>
+              <NarrativeNode id="dates-heading" className="w-full flex justify-center">
+                <span className="font-mono text-xs tracking-[0.3em] text-narrative-accent uppercase border-b border-narrative-accent/30 pb-2 opacity-60">
+                  03 / When, Where & Sign Up
+                </span>
+              </NarrativeNode>
             </div>
 
             {/* Workshop List Table - Revisited for Narrative Flow */}
-            <section className="max-w-3xl mx-auto px-8 mb-24 relative z-10 w-full flex justify-center">
-              <div className="flex flex-col gap-2 font-mono text-xs md:text-sm uppercase tracking-wider text-narrative-main/80 pt-12 w-fit">
-                <div className="flex justify-between gap-4 border-b border-narrative-accent/10 pb-2 font-bold text-narrative-accent text-left">
-                  <span className="w-20">Date</span>
-                  <span className="w-64">Location</span>
-                  <span className="w-32 text-left">Time</span>
+            <section className="max-w-3xl mx-auto px-4 md:px-8 mb-24 relative z-10 w-full">
+              <NarrativeNode id="dates-table" className="w-full">
+                <div className="flex flex-col gap-2 font-mono text-[10px] md:text-sm uppercase tracking-wider text-narrative-main/80 pt-12 w-full">
+                  <div className="flex gap-2 md:gap-4 border-b border-narrative-accent/10 pb-2 font-bold text-narrative-accent">
+                    <span className="w-16 md:w-20 shrink-0">Date</span>
+                    <span className="flex-1">Location</span>
+                    <span className="w-20 md:w-32 shrink-0 text-right md:text-left">Time</span>
+                  </div>
+                  <div className="flex gap-2 md:gap-4 border-b border-narrative-accent/10 pb-1">
+                    <span className="w-16 md:w-20 shrink-0">28th Feb</span>
+                    <span className="flex-1">Arnolfini, Bristol</span>
+                    <span className="w-20 md:w-32 shrink-0 text-right md:text-left">10am - 2pm</span>
+                  </div>
+                  <div className="flex gap-2 md:gap-4 border-b border-narrative-accent/10 pb-1">
+                    <span className="w-16 md:w-20 shrink-0">4th Mar</span>
+                    <span className="flex-1">Online</span>
+                    <span className="w-20 md:w-32 shrink-0 text-right md:text-left">6pm - 9pm</span>
+                  </div>
+                  <div className="flex gap-2 md:gap-4 border-b border-narrative-accent/10 pb-1">
+                    <span className="w-16 md:w-20 shrink-0">7th Mar</span>
+                    <span className="flex-1">Arnolfini, Bristol</span>
+                    <span className="w-20 md:w-32 shrink-0 text-right md:text-left">10am - 2pm</span>
+                  </div>
+                  <div className="flex gap-2 md:gap-4 border-b border-narrative-accent/10 pb-1">
+                    <span className="w-16 md:w-20 shrink-0">8th Apr</span>
+                    <span className="flex-1">Online</span>
+                    <span className="w-20 md:w-32 shrink-0 text-right md:text-left">6pm - 9pm</span>
+                  </div>
+                  <div className="flex gap-2 md:gap-4 border-b border-narrative-accent/10 pb-1">
+                    <span className="w-16 md:w-20 shrink-0">11th Apr</span>
+                    <span className="flex-1">Sun Pier House, Kent</span>
+                    <span className="w-20 md:w-32 shrink-0 text-right md:text-left">11am - 3pm</span>
+                  </div>
+                  <div className="flex gap-2 md:gap-4 border-b border-narrative-accent/10 pb-1">
+                    <span className="w-16 md:w-20 shrink-0">12th Apr</span>
+                    <span className="flex-1">Centre 151, London</span>
+                    <span className="w-20 md:w-32 shrink-0 text-right md:text-left">10am - 2pm</span>
+                  </div>
+                  <div className="flex gap-2 md:gap-4 border-b border-narrative-accent/10 pb-1">
+                    <span className="w-16 md:w-20 shrink-0">18th Apr</span>
+                    <span className="flex-1">Sun Pier House, Kent</span>
+                    <span className="w-20 md:w-32 shrink-0 text-right md:text-left">11am - 3pm</span>
+                  </div>
                 </div>
-                <div className="flex justify-between gap-4 border-b border-narrative-accent/10 pb-1 text-left">
-                  <span className="w-20">28th Feb</span>
-                  <span className="w-64">Arnolfini, Bristol</span>
-                  <span className="w-32 text-left">10am - 2pm</span>
-                </div>
-                <div className="flex justify-between gap-4 border-b border-narrative-accent/10 pb-1 text-left">
-                  <span className="w-20">4th Mar</span>
-                  <span className="w-64">Online</span>
-                  <span className="w-32 text-left">6pm - 9pm</span>
-                </div>
-                <div className="flex justify-between gap-4 border-b border-narrative-accent/10 pb-1 text-left">
-                  <span className="w-20">7th Mar</span>
-                  <span className="w-64">Arnolfini, Bristol</span>
-                  <span className="w-32 text-left">10am - 2pm</span>
-                </div>
-                <div className="flex justify-between gap-4 border-b border-narrative-accent/10 pb-1 text-left">
-                  <span className="w-20">8th Apr</span>
-                  <span className="w-64">Online</span>
-                  <span className="w-32 text-left">6pm - 9pm</span>
-                </div>
-                <div className="flex justify-between gap-4 border-b border-narrative-accent/10 pb-1 text-left">
-                  <span className="w-20">11th Apr</span>
-                  <span className="w-64">Sun Pier House, Kent</span>
-                  <span className="w-32 text-left">11am - 3pm</span>
-                </div>
-                <div className="flex justify-between gap-4 border-b border-narrative-accent/10 pb-1 text-left">
-                  <span className="w-20">12th Apr</span>
-                  <span className="w-64">Centre 151, London</span>
-                  <span className="w-32 text-left">10am - 2pm</span>
-                </div>
-                <div className="flex justify-between gap-4 border-b border-narrative-accent/10 pb-1 text-left">
-                  <span className="w-20">18th Apr</span>
-                  <span className="w-64">Sun Pier House, Kent</span>
-                  <span className="w-32 text-left">11am - 3pm</span>
-                </div>
-              </div>
+              </NarrativeNode>
             </section>
 
             <Signup theme={theme} />
